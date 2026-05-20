@@ -529,6 +529,15 @@
         /* Contact image */
         .contact-img-ph { min-height: 180px; margin-top: 1.5rem; }
 
+        @media (min-width: 1025px) {
+            .gallery-grid img,
+            .gallery-grid > div {
+                height: 260px !important;
+            }
+            .gallery-grid > div img {
+                height: 100% !important;
+            }
+        }
         @media (max-width: 1024px) {
             .gallery-grid { grid-template-columns: 1fr 1fr; }
         }
@@ -737,15 +746,15 @@
     <h2 class="sec-title">Referenzfotos</h2>
     <p style="font-size:0.97rem;color:var(--gray-500);margin:0.75rem 0 2.5rem;max-width:52ch;">Einige Eindrücke aus abgeschlossenen Projekten – Türen, Fenster und Tore aus unserer Montage.</p>
     <div class="gallery-grid">
-        <img src="2.png" alt="Haustür-Montage" style="width:100%;border-radius:12px;object-fit:cover;object-position:center top;height:220px;display:block;">
+        <img src="2.png" alt="Haustür-Montage" style="width:100%;border-radius:12px;object-fit:cover;object-position:center 40%;height:220px;display:block;">
         <img src="3.png" alt="Fenstereinbau" style="width:100%;border-radius:12px;object-fit:cover;object-position:center top;height:220px;display:block;">
-        <img src="4.png" alt="Garagentor" style="width:100%;border-radius:12px;object-fit:cover;object-position:center center;height:220px;display:block;">
-        <img src="5.png" alt="Rollläden / Sonnenschutz" style="width:100%;border-radius:12px;object-fit:cover;object-position:center center;height:220px;display:block;">
-        <img src="6.png" alt="Eingangstür Detail" style="width:100%;border-radius:12px;object-fit:cover;object-position:center center;height:220px;display:block;">
-        <img src="7.png" alt="Abgeschlossenes Projekt" style="width:100%;border-radius:12px;object-fit:cover;object-position:center center;height:220px;display:block;">
+        <div style="width:100%;border-radius:12px;height:220px;overflow:hidden;"><img src="4.png" alt="Garagentor" style="width:100%;height:100%;object-fit:cover;object-position:center center;transform:scale(1.08);display:block;"></div>
+        <img src="11.jpg" alt="Lasermessung Montage" style="width:100%;border-radius:12px;object-fit:cover;object-position:center 30%;height:320px;display:block;">
+        <div style="width:100%;border-radius:12px;height:220px;overflow:hidden;"><img src="6.png" alt="Eingangstür Detail" style="width:100%;height:100%;object-fit:cover;object-position:center center;transform:scale(1.08);display:block;"></div>
+        <div style="width:100%;border-radius:12px;height:220px;overflow:hidden;"><img src="7.png" alt="Abgeschlossenes Projekt" style="width:100%;height:100%;object-fit:cover;object-position:center center;transform:scale(1.08);display:block;"></div>
         <img src="9.jpg" alt="Türmontage Renorep" style="width:100%;border-radius:12px;object-fit:cover;object-position:center 20%;height:320px;display:block;">
         <img src="10.jpg" alt="Haustür Einbau" style="width:100%;border-radius:12px;object-fit:cover;object-position:center 25%;height:320px;display:block;">
-        <img src="11.jpg" alt="Lasermessung Montage" style="width:100%;border-radius:12px;object-fit:cover;object-position:center 30%;height:320px;display:block;">
+        <div style="width:100%;border-radius:12px;height:220px;overflow:hidden;"><img src="5.png" alt="Rollläden / Sonnenschutz" style="width:100%;height:100%;object-fit:cover;object-position:center center;transform:scale(1.08);display:block;"></div>
     </div>
 </section>
 
