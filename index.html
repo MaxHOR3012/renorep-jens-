@@ -510,9 +510,21 @@
             .f-nav { flex-wrap: wrap; justify-content: center; gap: 1rem; }
             .form { padding-top: 0.5rem !important; }
 
-            /* Stern auf Mobile immer verstecken */
+            /* Desktop-Stern auf Mobile verstecken */
             .star-badge { display: none !important; }
-            .star-badge-mobile { display: none !important; }
+
+            /* Stern auf Mobile: unterhalb der Buttons, zentriert */
+            .hero-cta-row {
+                flex-direction: column !important;
+                align-items: flex-start !important;
+                gap: 0 !important;
+            }
+            .star-badge-mobile {
+                display: block !important;
+                margin-top: 1.25rem;
+                width: 110px !important;
+                height: 110px !important;
+            }
 
             /* Label-Zeile nicht abschneiden */
             .hero-label { white-space: normal !important; overflow: hidden; font-size: 0.68rem !important; }
@@ -648,7 +660,7 @@
     <!-- Stern-Badge -->
     <a href="https://wa.me/4915234796615?text=Ich%20interessiere%20mich%20f%C3%BCr%20die%20professionelle%20Fensterwartung%20ab%2075%20%E2%82%AC" target="_blank" rel="noopener"
        class="star-badge"
-       style="position:absolute;top:41rem;right:5rem;width:175px;height:175px;animation:starBlink 1.6s ease-in-out infinite;z-index:10;cursor:pointer;text-decoration:none;">
+       style="position:absolute;top:7rem;right:5rem;width:175px;height:175px;animation:starBlink 1.6s ease-in-out infinite;z-index:10;cursor:pointer;text-decoration:none;">
         <svg viewBox="0 0 130 130" style="position:absolute;inset:0;width:100%;height:100%;">
             <polygon points="65,5 74,45 112,35 88,65 112,95 74,85 65,125 56,85 18,95 42,65 18,35 56,45" fill="#D4B483"/>
         </svg>
@@ -664,7 +676,7 @@
         <p class="hero-sub">
             Ihr Montageprofi im Lahn-Dill-Kreis &amp; Dreiländereck.<br>Montage und Planung aus Erfahrung.<br>Lassen Sie sich überzeugen.
         </p>
-        <div style="display:flex;align-items:center;gap:1rem;">
+        <div class="hero-cta-row" style="display:flex;align-items:center;gap:1rem;">
             <div class="hero-ctas">
                 <a href="#kontakt" class="btn btn-dark">
                     Kostenlos anfragen
