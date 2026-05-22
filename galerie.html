@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Galerie – Renorep</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --white:   #FFFFFF;
+            --gray-50: #F8FAFC;
+            --gray-100:#F1F5F9;
+            --gray-200:#E2E8F0;
+            --gray-400:#94A3B8;
+            --gray-500:#64748B;
+            --gray-900:#0F172A;
+            --blue:    #2563EB;
+            --blue-dark:#1D4ED8;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: 'Nunito', sans-serif;
+            color: var(--gray-900);
+            line-height: 1.6;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            background: url('door-bg.png') center center / cover no-repeat fixed;
+            position: relative;
+        }
+        body::before {
+            content: '';
+            position: fixed;
+            inset: 0;
+            background: rgba(253, 250, 245, 0.85);
+            backdrop-filter: blur(2px);
+            z-index: 0;
+        }
+        nav, main, footer { position: relative; z-index: 1; }
+
+        /* ── NAV ── */
+        nav {
+            position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+            height: 66px;
+            display: flex; align-items: center; justify-content: space-between;
+            padding: 0 4rem;
+            background: rgba(255,255,255,0.96);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--gray-200);
+        }
+        .nav-logo {
+            font-family: 'Nunito', sans-serif;
+            font-size: 1.25rem; font-weight: 700;
+            color: var(--gray-900); text-decoration: none;
+        }
+        .nav-links {
+            display: flex; align-items: center; list-style: none; gap: 2.5rem;
+        }
+        .nav-links a {
+            font-size: 0.875rem; font-weight: 500;
+            color: var(--gray-500); text-decoration: none;
+            transition: color 0.15s;
+        }
+        .nav-links a:hover { color: var(--gray-900); }
+        .nav-links a.active { color: var(--gray-900); font-weight: 700; }
+        .nav-cta {
+            background: var(--gray-900) !important;
+            color: white !important;
+            padding: 0.55rem 1.4rem;
+            border-radius: 7px;
+            transition: background 0.15s !important;
+        }
+        .nav-cta:hover { background: var(--blue) !important; }
+
+        /* ── MAIN ── */
+        main {
+            flex: 1;
+            padding: 100px 4rem 6rem;
+            max-width: 1200px;
+            margin: 0 auto;
+            width: 100%;
+        }
+
+        /* ── HEADER ── */
+        .page-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+        .page-label {
+            display: inline-flex; align-items: center; gap: 0.5rem;
+            font-size: 0.78rem; font-weight: 600;
+            color: var(--blue); letter-spacing: 0.07em;
+            text-transform: uppercase; margin-bottom: 1rem;
+        }
+        .page-label::before {
+            content: ''; display: block;
+            width: 20px; height: 2px; background: var(--blue);
+            border-radius: 1px;
+        }
+        .page-header h1 {
+            font-size: clamp(2rem, 4vw, 3rem);
+            font-weight: 800; line-height: 1.1;
+            letter-spacing: -0.03em;
+            color: var(--gray-900);
+            margin-bottom: 0.75rem;
+        }
+        .page-header p {
+            font-size: 1.05rem; color: var(--gray-500);
+            max-width: 50ch; margin: 0 auto;
+        }
+
+        /* ── FILTER TABS ── */
+        .filter-bar {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+            margin-bottom: 2.5rem;
+            background: white;
+            border: 1.5px solid var(--gray-200);
+            border-radius: 14px;
+            padding: 0.5rem;
+            width: fit-content;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        .filter-btn {
+            font-family: 'Nunito', sans-serif;
+            font-size: 0.875rem;
+            font-weight: 600;
+            color: var(--gray-500);
+            background: transparent;
+            border: none;
+            cursor: pointer;
+            padding: 0.55rem 1.2rem;
+            border-radius: 9px;
+            transition: all 0.18s;
+            white-space: nowrap;
+        }
+        .filter-btn:hover {
+            color: var(--gray-900);
+            background: var(--gray-100);
+        }
+        .filter-btn.active {
+            background: var(--gray-900);
+            color: white;
+        }
+
+        /* ── GALLERY GRID ── */
+        .gallery-grid {
+            columns: 3;
+            column-gap: 1rem;
+        }
+        .gallery-item {
+            break-inside: avoid;
+            margin-bottom: 1rem;
+            border-radius: 12px;
+            overflow: hidden;
+            position: relative;
+            cursor: pointer;
+            display: block;
+        }
+        .gallery-item img {
+            width: 100%;
+            display: block;
+            border-radius: 12px;
+            transition: transform 0.4s ease;
+        }
+        .gallery-item:hover img {
+            transform: scale(1.04);
+        }
+        .gallery-item .overlay {
+            position: absolute;
+            inset: 0;
+            background: rgba(15,23,42,0);
+            transition: background 0.3s;
+            border-radius: 12px;
+            display: flex;
+            align-items: flex-end;
+            padding: 1.2rem;
+        }
+        .gallery-item:hover .overlay {
+            background: rgba(15,23,42,0.35);
+        }
+        .overlay-label {
+            font-size: 0.78rem;
+            font-weight: 700;
+            color: white;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            opacity: 0;
+            transform: translateY(6px);
+            transition: all 0.25s;
+            background: rgba(37,99,235,0.85);
+            padding: 0.3rem 0.7rem;
+            border-radius: 6px;
+        }
+        .gallery-item:hover .overlay-label {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Hidden items */
+        .gallery-item.hidden { display: none; }
+
+        /* ── LIGHTBOX ── */
+        .lightbox {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,0.92);
+            z-index: 999;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+        }
+        .lightbox.open { display: flex; }
+        .lightbox img {
+            max-width: 90vw;
+            max-height: 90vh;
+            border-radius: 10px;
+            object-fit: contain;
+            box-shadow: 0 30px 80px rgba(0,0,0,0.5);
+        }
+        .lightbox-close {
+            position: absolute;
+            top: 1.5rem; right: 1.5rem;
+            background: white;
+            border: none; cursor: pointer;
+            width: 40px; height: 40px;
+            border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 1.2rem;
+            color: var(--gray-900);
+            transition: background 0.15s;
+        }
+        .lightbox-close:hover { background: var(--gray-100); }
+        .lightbox-caption {
+            position: absolute;
+            bottom: 1.5rem; left: 50%; transform: translateX(-50%);
+            color: rgba(255,255,255,0.7);
+            font-size: 0.85rem; font-weight: 500;
+            text-align: center;
+        }
+
+        /* ── FOOTER ── */
+        footer {
+            background: var(--gray-900); color: rgba(255,255,255,0.45);
+            padding: 2rem 4rem;
+            display: flex; align-items: center; justify-content: space-between;
+            position: relative; z-index: 1;
+        }
+        .f-logo {
+            font-family: 'Nunito', sans-serif; font-size: 1.15rem;
+            font-weight: 700; color: white; text-decoration: none;
+        }
+        .f-copy { font-size: 0.76rem; }
+
+        /* ── RESPONSIVE ── */
+        @media (max-width: 900px) {
+            .gallery-grid { columns: 2; }
+        }
+        @media (max-width: 600px) {
+            nav { padding: 0 1.5rem; }
+            .nav-links { display: none; }
+            main { padding: 90px 1.25rem 4rem; }
+            .gallery-grid { columns: 1; }
+            footer { flex-direction: column; gap: 1rem; text-align: center; padding: 1.5rem; }
+        }
+    </style>
+</head>
+<body>
+
+<nav>
+    <a href="index.html" class="nav-logo"><img src="logo-clean.png" alt="Renorep" style="height:40px;width:auto;"></a>
+    <ul class="nav-links">
+        <li><a href="index.html#leistungen">Leistungen</a></li>
+        <li><a href="index.html#ueber-uns">Über uns</a></li>
+        <li><a href="galerie.html" class="active">Galerie</a></li>
+        <li><a href="index.html#referenzen">Referenzen</a></li>
+        <li><a href="konfigurator.html">Konfigurator</a></li>
+        <li><a href="index.html#kontakt" class="nav-cta">Kontakt</a></li>
+    </ul>
+</nav>
+
+<main>
+    <div class="page-header">
+        <div class="page-label">Unsere Arbeiten</div>
+        <h1>Galerie</h1>
+        <p>Einblicke in unsere Projekte – von der Montage bis zum fertigen Ergebnis.</p>
+    </div>
+
+    <!-- Filter Tabs -->
+    <div class="filter-bar">
+        <button class="filter-btn active" data-filter="alle">Alle</button>
+        <button class="filter-btn" data-filter="tueren">Türen</button>
+        <button class="filter-btn" data-filter="fenster">Fenster</button>
+        <button class="filter-btn" data-filter="team">Team</button>
+        <button class="filter-btn" data-filter="showroom">Showroom</button>
+    </div>
+
+    <!-- Gallery -->
+    <div class="gallery-grid" id="gallery">
+
+        <!-- Team -->
+        <div class="gallery-item" data-cat="team" onclick="openLightbox(this)">
+            <img src="bild neu.png" alt="Renorep Monteur beim Fenstermessen">
+            <div class="overlay"><span class="overlay-label">Team</span></div>
+        </div>
+
+        <div class="gallery-item" data-cat="team" onclick="openLightbox(this)">
+            <img src="wa1.jpeg" alt="Haustür-Montage – Renorep">
+            <div class="overlay"><span class="overlay-label">Team</span></div>
+        </div>
+
+        <!-- Türen -->
+        <div class="gallery-item" data-cat="tueren" onclick="openLightbox(this)">
+            <img src="proj1.jpg" alt="Schwarze Aluminium-Faltanlage">
+            <div class="overlay"><span class="overlay-label">Türen</span></div>
+        </div>
+
+        <!-- Fenster -->
+        <div class="gallery-item" data-cat="fenster" onclick="openLightbox(this)">
+            <img src="proj3.jpg" alt="Montierte Fenster mit Holzdecke">
+            <div class="overlay"><span class="overlay-label">Fenster</span></div>
+        </div>
+
+        <!-- Team -->
+        <div class="gallery-item" data-cat="team" onclick="openLightbox(this)">
+            <img src="wa2.jpeg" alt="Türmontage vor Ort">
+            <div class="overlay"><span class="overlay-label">Team</span></div>
+        </div>
+
+        <!-- Türen -->
+        <div class="gallery-item" data-cat="tueren" onclick="openLightbox(this)">
+            <img src="proj2.jpg" alt="Schwarze Tür mit Milchglas">
+            <div class="overlay"><span class="overlay-label">Türen</span></div>
+        </div>
+
+        <!-- Fenster -->
+        <div class="gallery-item" data-cat="fenster" onclick="openLightbox(this)">
+            <img src="proj4.jpg" alt="Fensteranlage im Neubau">
+            <div class="overlay"><span class="overlay-label">Fenster</span></div>
+        </div>
+
+        <!-- Team -->
+        <div class="gallery-item" data-cat="team" onclick="openLightbox(this)">
+            <img src="wa3.jpeg" alt="Monteur beim Einmessen mit Laser">
+            <div class="overlay"><span class="overlay-label">Team</span></div>
+        </div>
+
+        <!-- Türen -->
+        <div class="gallery-item" data-cat="tueren" onclick="openLightbox(this)">
+            <img src="proj5.jpg" alt="Weiße Innentür mit schwarzem Griff">
+            <div class="overlay"><span class="overlay-label">Türen</span></div>
+        </div>
+
+        <!-- Fenster -->
+        <div class="gallery-item" data-cat="fenster" onclick="openLightbox(this)">
+            <img src="proj6.jpg" alt="Fenster in Holzdekor-Rahmen">
+            <div class="overlay"><span class="overlay-label">Fenster</span></div>
+        </div>
+
+        <!-- Showroom -->
+        <div class="gallery-item" data-cat="showroom" onclick="openLightbox(this)">
+            <img src="showroom1.jpg" alt="Renorep Ausstellungsraum">
+            <div class="overlay"><span class="overlay-label">Showroom</span></div>
+        </div>
+
+        <div class="gallery-item" data-cat="showroom" onclick="openLightbox(this)">
+            <img src="showroom2.jpg" alt="Musterkoffer mit Garantie-Materialien">
+            <div class="overlay"><span class="overlay-label">Showroom</span></div>
+        </div>
+
+    </div>
+</main>
+
+<!-- Lightbox -->
+<div class="lightbox" id="lightbox" onclick="closeLightbox(event)">
+    <button class="lightbox-close" onclick="closeLightbox()">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 6L6 18M6 6l12 12"/></svg>
+    </button>
+    <img id="lightbox-img" src="" alt="">
+    <div class="lightbox-caption" id="lightbox-caption"></div>
+</div>
+
+<footer>
+    <a href="index.html" class="f-logo">Renorep</a>
+    <div class="f-copy">© 2025 Renorep Montagedienstleistung</div>
+</footer>
+
+<script>
+    // Filter
+    document.querySelectorAll('.filter-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+            document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            const filter = btn.dataset.filter;
+            document.querySelectorAll('.gallery-item').forEach(item => {
+                if (filter === 'alle' || item.dataset.cat === filter) {
+                    item.classList.remove('hidden');
+                } else {
+                    item.classList.add('hidden');
+                }
+            });
+        });
+    });
+
+    // Lightbox
+    function openLightbox(el) {
+        const img = el.querySelector('img');
+        document.getElementById('lightbox-img').src = img.src;
+        document.getElementById('lightbox-img').alt = img.alt;
+        document.getElementById('lightbox-caption').textContent = img.alt;
+        document.getElementById('lightbox').classList.add('open');
+        document.body.style.overflow = 'hidden';
+    }
+    function closeLightbox(e) {
+        if (!e || e.target === document.getElementById('lightbox') || e.currentTarget.classList.contains('lightbox-close')) {
+            document.getElementById('lightbox').classList.remove('open');
+            document.body.style.overflow = '';
+        }
+    }
+    document.addEventListener('keydown', e => {
+        if (e.key === 'Escape') closeLightbox({ target: document.getElementById('lightbox') });
+    });
+</script>
+
+</body>
+</html>
