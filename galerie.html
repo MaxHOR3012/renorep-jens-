@@ -154,26 +154,27 @@
 
         /* ── GALLERY GRID ── */
         .gallery-grid {
-            columns: 3;
-            column-gap: 1rem;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 0.75rem;
         }
         .gallery-item {
-            break-inside: avoid;
-            margin-bottom: 1rem;
             border-radius: 12px;
             overflow: hidden;
             position: relative;
             cursor: pointer;
             display: block;
+            aspect-ratio: 4 / 3;
         }
         .gallery-item img {
             width: 100%;
+            height: 100%;
+            object-fit: cover;
             display: block;
-            border-radius: 12px;
             transition: transform 0.4s ease;
         }
         .gallery-item:hover img {
-            transform: scale(1.04);
+            transform: scale(1.05);
         }
         .gallery-item .overlay {
             position: absolute;
@@ -264,13 +265,13 @@
 
         /* ── RESPONSIVE ── */
         @media (max-width: 900px) {
-            .gallery-grid { columns: 2; }
+            .gallery-grid { grid-template-columns: repeat(2, 1fr); }
         }
         @media (max-width: 600px) {
             nav { padding: 0 1.5rem; }
             .nav-links { display: none; }
             main { padding: 90px 1.25rem 4rem; }
-            .gallery-grid { columns: 1; }
+            .gallery-grid { grid-template-columns: 1fr; }
             footer { flex-direction: column; gap: 1rem; text-align: center; padding: 1.5rem; }
         }
     </style>
@@ -309,84 +310,67 @@
     <!-- Gallery -->
     <div class="gallery-grid" id="gallery">
 
-        <!-- Vorher / Nachher -->
+        <!-- Reihe 1 -->
+        <div class="gallery-item" data-cat="team" onclick="openLightbox(this)">
+            <img src="wa1.jpeg" alt="Haustür-Montage – Renorep" style="object-position:55% 20%;">
+            <div class="overlay"><span class="overlay-label">Team</span></div>
+        </div>
+
+        <div class="gallery-item" data-cat="tueren" onclick="openLightbox(this)">
+            <img src="proj2.jpg" alt="Schwarze Tür mit Milchglas" style="object-position:center 40%;">
+            <div class="overlay"><span class="overlay-label">Türen</span></div>
+        </div>
+
+        <div class="gallery-item" data-cat="fenster" onclick="openLightbox(this)">
+            <img src="proj3.jpg" alt="Schiebefenster mit Holzdecke" style="object-position:center 55%;">
+            <div class="overlay"><span class="overlay-label">Fenster</span></div>
+        </div>
+
+        <!-- Reihe 2 -->
         <div class="gallery-item" data-cat="vorher-nachher" onclick="openLightbox(this)">
-            <img src="vorher.jpg" alt="Vorher – Alte Tür vor der Montage">
+            <img src="vorher.jpg" alt="Vorher – Alte Anlage vor der Montage" style="object-position:center 38%;">
             <div class="overlay"><span class="overlay-label" style="background:rgba(180,60,60,0.88);">Vorher</span></div>
         </div>
 
         <div class="gallery-item" data-cat="vorher-nachher" onclick="openLightbox(this)">
-            <img src="nachher.jpg" alt="Nachher – Neue Tür nach der Montage">
+            <img src="nachher.jpg" alt="Nachher – Neue Schiebe-/Haustür nach Montage" style="object-position:center 32%;">
             <div class="overlay"><span class="overlay-label" style="background:rgba(30,140,80,0.88);">Nachher</span></div>
         </div>
 
-        <!-- Team -->
-        <div class="gallery-item" data-cat="team" onclick="openLightbox(this)" style="height:320px;">
-            <img src="bild neu.png" alt="Renorep Monteur beim Fenstermessen" style="width:100%;height:100%;object-fit:cover;object-position:center top;transform:scale(1.2);transform-origin:center top;">
-            <div class="overlay"><span class="overlay-label">Team</span></div>
-        </div>
-
-        <div class="gallery-item" data-cat="team" onclick="openLightbox(this)">
-            <img src="wa1.jpeg" alt="Haustür-Montage – Renorep">
-            <div class="overlay"><span class="overlay-label">Team</span></div>
-        </div>
-
-        <!-- Türen -->
         <div class="gallery-item" data-cat="tueren" onclick="openLightbox(this)">
-            <img src="proj1.jpg" alt="Schwarze Aluminium-Faltanlage">
+            <img src="proj1.jpg" alt="Schwarze Aluminium-Faltanlage" style="object-position:center 35%;">
             <div class="overlay"><span class="overlay-label">Türen</span></div>
         </div>
 
-        <!-- Fenster -->
-        <div class="gallery-item" data-cat="fenster" onclick="openLightbox(this)">
-            <img src="proj3.jpg" alt="Montierte Fenster mit Holzdecke">
-            <div class="overlay"><span class="overlay-label">Fenster</span></div>
-        </div>
-
-        <!-- Team -->
+        <!-- Reihe 3 -->
         <div class="gallery-item" data-cat="team" onclick="openLightbox(this)">
-            <img src="wa2.jpeg" alt="Türmontage vor Ort">
+            <img src="wa2.jpeg" alt="Türmontage vor Ort" style="object-position:center 15%;">
             <div class="overlay"><span class="overlay-label">Team</span></div>
         </div>
 
-        <!-- Türen -->
         <div class="gallery-item" data-cat="tueren" onclick="openLightbox(this)">
-            <img src="proj2.jpg" alt="Schwarze Tür mit Milchglas">
+            <img src="proj5.jpg" alt="Weiße Innentür mit schwarzem Griff" style="object-position:30% 55%;">
             <div class="overlay"><span class="overlay-label">Türen</span></div>
         </div>
 
-        <!-- Fenster -->
-        <div class="gallery-item" data-cat="fenster" onclick="openLightbox(this)">
-            <img src="proj4.jpg" alt="Fensteranlage im Neubau">
-            <div class="overlay"><span class="overlay-label">Fenster</span></div>
-        </div>
-
-        <!-- Team -->
         <div class="gallery-item" data-cat="team" onclick="openLightbox(this)">
-            <img src="wa3.jpeg" alt="Monteur beim Einmessen mit Laser">
+            <img src="wa3.jpeg" alt="Monteur beim Einmessen mit Laser" style="object-position:center 35%;">
             <div class="overlay"><span class="overlay-label">Team</span></div>
         </div>
 
-        <!-- Türen -->
-        <div class="gallery-item" data-cat="tueren" onclick="openLightbox(this)">
-            <img src="proj5.jpg" alt="Weiße Innentür mit schwarzem Griff">
-            <div class="overlay"><span class="overlay-label">Türen</span></div>
-        </div>
-
-        <!-- Fenster -->
-        <div class="gallery-item" data-cat="fenster" onclick="openLightbox(this)">
-            <img src="proj6.jpg" alt="Fenster in Holzdekor-Rahmen">
-            <div class="overlay"><span class="overlay-label">Fenster</span></div>
-        </div>
-
-        <!-- Showroom -->
+        <!-- Reihe 4 -->
         <div class="gallery-item" data-cat="showroom" onclick="openLightbox(this)">
-            <img src="showroom1.jpg" alt="Renorep Ausstellungsraum">
+            <img src="showroom1.jpg" alt="Renorep Ausstellungsraum" style="object-position:center 40%;">
             <div class="overlay"><span class="overlay-label">Showroom</span></div>
         </div>
 
+        <div class="gallery-item" data-cat="team" onclick="openLightbox(this)">
+            <img src="bild neu.png" alt="Renorep Monteur beim Fenstermessen" style="object-position:center 25%;">
+            <div class="overlay"><span class="overlay-label">Team</span></div>
+        </div>
+
         <div class="gallery-item" data-cat="showroom" onclick="openLightbox(this)">
-            <img src="showroom2.jpg" alt="Musterkoffer mit Garantie-Materialien">
+            <img src="showroom2.jpg" alt="Musterkoffer mit Garantie-Materialien" style="object-position:center 25%;">
             <div class="overlay"><span class="overlay-label">Showroom</span></div>
         </div>
 
