@@ -1116,7 +1116,9 @@
     window.addEventListener('scroll', () => {
         const scrollY = window.scrollY;
         const heroH = hero.offsetHeight;
-        const fade = Math.max(0.25, 1 - scrollY / (heroH * 1.2));
+        const isMobile = window.innerWidth <= 768;
+        const factor = isMobile ? 2.5 : 1.2;
+        const fade = Math.max(0.25, 1 - scrollY / (heroH * factor));
         hero.style.opacity = fade;
     }, { passive: true });
 </script>
