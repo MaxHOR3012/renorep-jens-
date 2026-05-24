@@ -348,7 +348,7 @@
             </div>
         </div>
 
-        <div class="gallery-item" data-cat="tueren" onclick="openLightbox(this)">
+        <div class="gallery-item" data-cat="tueren fenster" onclick="openLightbox(this)">
             <img src="proj1.jpg" alt="Schwarze Aluminium-Faltanlage" style="object-position:center 45%;">
             <div class="overlay"><span class="overlay-label">Türen</span></div>
         </div>
@@ -429,7 +429,8 @@
             btn.classList.add('active');
             const filter = btn.dataset.filter;
             document.querySelectorAll('.gallery-item').forEach(item => {
-                if (filter === 'alle' || item.dataset.cat === filter) {
+                const cats = (item.dataset.cat || '').split(' ');
+                if (filter === 'alle' || cats.includes(filter)) {
                     item.classList.remove('hidden');
                 } else {
                     item.classList.add('hidden');
