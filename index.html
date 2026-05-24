@@ -1110,6 +1110,15 @@
         el.style.transition = `opacity 0.45s ease ${i * 0.04}s, transform 0.45s ease ${i * 0.04}s`;
         io.observe(el);
     });
+
+    // Hero fade on scroll
+    const hero = document.querySelector('.hero');
+    window.addEventListener('scroll', () => {
+        const scrollY = window.scrollY;
+        const heroH = hero.offsetHeight;
+        const fade = Math.max(0, 1 - scrollY / (heroH * 0.6));
+        hero.style.opacity = fade;
+    }, { passive: true });
 </script>
 <!-- WHATSAPP FAB -->
 <a href="https://wa.me/4915234796615" target="_blank" rel="noopener" aria-label="WhatsApp"
