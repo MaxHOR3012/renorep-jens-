@@ -383,8 +383,19 @@
         /* ── FOOTER ── */
         footer {
             background: var(--gray-900); color: rgba(255,255,255,0.45);
-            padding: 2.5rem 4rem;
+            padding: 2.5rem 4rem 1rem;
+            display: flex; flex-direction: column; gap: 0;
+        }
+        .footer-main {
             display: flex; align-items: center; justify-content: space-between;
+            padding-bottom: 1.5rem;
+        }
+        .footer-bottom {
+            border-top: 1px solid rgba(255,255,255,0.08);
+            padding-top: 1rem;
+            text-align: center;
+            font-size: 0.72rem;
+            color: rgba(255,255,255,0.3);
         }
         .f-logo {
             text-decoration: none;
@@ -1052,19 +1063,22 @@
 
 <!-- FOOTER -->
 <footer>
-    <a href="#" class="f-logo"><img src="logo-clean.png" alt="Renorep"></a>
-    <ul class="f-nav">
-        <li><a href="#leistungen">Leistungen</a></li>
-        <li><a href="#ueber-uns">Über uns</a></li>
-        <li><a href="#galerie">Galerie</a></li>
-        <li><a href="#galerie">Galerie</a></li>
-        <li><a href="#referenzen">Referenzen</a></li>
-        <li><a href="#kontakt">Kontakt</a></li>
-        <li><a href="impressum.html">Impressum</a></li>
-        <li><a href="datenschutz.html">Datenschutz</a></li>
-    </ul>
-    <div class="f-copy">© 2025 Renorep Montagedienstleistung</div>
-    <div class="f-copy">Designed by <a href="mailto:info@leadflowconsulting.de?subject=Anfrage%20Website&body=Hallo%2C%0A%0Aich%20interessiere%20mich%20f%C3%BCr%20eine%20Website.%0A%0AMit%20freundlichen%20Gr%C3%BC%C3%9Fen" style="color:rgba(255,255,255,0.45);text-decoration:none;" onmouseover="this.style.color='white'" onmouseout="this.style.color='rgba(255,255,255,0.45)'">info@leadflowconsulting.de</a></div>
+    <div class="footer-main">
+        <a href="#" class="f-logo"><img src="logo-clean.png" alt="Renorep"></a>
+        <ul class="f-nav">
+            <li><a href="#leistungen">Leistungen</a></li>
+            <li><a href="#ueber-uns">Über uns</a></li>
+            <li><a href="#galerie">Galerie</a></li>
+            <li><a href="#referenzen">Referenzen</a></li>
+            <li><a href="#kontakt">Kontakt</a></li>
+            <li><a href="impressum.html">Impressum</a></li>
+            <li><a href="datenschutz.html">Datenschutz</a></li>
+        </ul>
+        <div class="f-copy">© 2025 Renorep Montagedienstleistung</div>
+    </div>
+    <div class="footer-bottom">
+        Designed by <a href="mailto:info@leadflowconsulting.de?subject=Anfrage%20Website&body=Hallo%2C%0A%0Aich%20interessiere%20mich%20f%C3%BCr%20eine%20Website.%0A%0AMit%20freundlichen%20Gr%C3%BC%C3%9Fen" style="color:rgba(255,255,255,0.3);text-decoration:none;" onmouseover="this.style.color='white'" onmouseout="this.style.color='rgba(255,255,255,0.3)'">info@leadflowconsulting.de</a>
+    </div>
 </footer>
 
 <script>
